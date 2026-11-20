@@ -1,0 +1,52 @@
+[submodule "ro-crate"]
+	path = ro-crate
+	url = https://github.com/ResearchObject/ro-crate.git
+	shallow = true
+[submodule "agent-file"]
+	path = agent-file
+	url = https://github.com/letta-ai/agent-file.git
+	shallow = true
+[submodule "mcpb"]
+	path = mcpb
+	url = https://github.com/modelcontextprotocol/mcpb.git
+	shallow = true
+[submodule "datapackage"]
+	path = datapackage
+	url = https://github.com/frictionlessdata/datapackage.git
+	shallow = true
+[submodule "devcontainers-spec"]
+	path = devcontainers-spec
+	url = https://github.com/devcontainers/spec.git
+	shallow = true
+[submodule "containerd"]
+	path = containerd
+	url = https://github.com/containerd/containerd.git
+	shallow = true
+[submodule "podman"]
+	path = podman
+	url = https://github.com/podman-container-tools/podman.git
+	shallow = true
+[submodule "apple-container"]
+	path = apple-container
+	url = https://github.com/apple/container.git
+	shallow = true
+[submodule "gvisor"]
+	path = gvisor
+	url = https://github.com/gvisor/gvisor.git
+	shallow = true
+[submodule "firecracker"]
+	path = firecracker
+	url = https://github.com/firecracker-microvm/firecracker.git
+	shallow = true
+[submodule "e2b"]
+	path = e2b
+	url = https://github.com/e2b-dev/E2B.git
+	shallow = true
+[submodule "cloudflare-sandbox-sdk"]
+	path = cloudflare-sandbox-sdk
+	url = https://github.com/cloudflare/sandbox-sdk.git
+	shallow = true
+[submodule "pyodide"]
+	path = pyodide
+	url = https://github.com/pyodide/pyodide.git
+	shallow = true
