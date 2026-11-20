@@ -82,7 +82,7 @@ The pinned runtimes, plus what else exists, by how much they isolate:
 | **MicroVMs** | Firecracker, Cloud Hypervisor, Kata Containers | A real VM boundary that starts in a fraction of a second. The default for running code nobody has reviewed |
 | **Hosted agent sandboxes** | E2B, Cloudflare Sandbox, Daytona, Modal, Vercel Sandbox | What chat products and agent frameworks call to run code. Mostly Firecracker or gVisor underneath |
 | **WebAssembly** | Pyodide, Wasmtime, WasmEdge, StackBlitz WebContainers | Runs in a browser or a tiny runtime with nothing installed. A reader could re-run a flave's Python script from a web page |
-| **Environments without containers** | Nix flakes, devenv, Flox, `uv` | Reproducible toolchains from a lockfile; flave-ai itself uses a Nix flake |
+| **Environments, not isolation** | Nix flakes, devenv, Flox, `uv` | A different question from every row above: *what is installed*, not *what the code can reach*. A script in a Nix shell runs as you, with your files and keys. Pair with a row above to run untrusted code; flave-ai itself uses a Nix flake |
 
 The likely flave answer: `env/` stays a **recipe** (lockfiles, optionally a
 `devcontainer.json` or OCI image reference), and the host chooses the runtime.
