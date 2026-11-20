@@ -17,7 +17,8 @@ Two halves:
    or safest one.
 
 Home of the question: the flave master spec, §5.7 (the sandbox directories),
-§5.8 (`config/`, `.env`, `.secrets`) and §5.9 (inspiration), and the
+§5.8 (`config/`, `.env`, `.secrets`); the exploration
+[`Inspiration-for-the-Sandbox-and-Settings-Design.md`](https://github.com/lossless-group/flave/blob/development/context-v/explorations/Inspiration-for-the-Sandbox-and-Settings-Design.md); and the
 exploration
 [`A-Flave-Is-the-Zip-for-an-Agent-Session.md`](https://github.com/lossless-group/flave/blob/development/context-v/explorations/A-Flave-Is-the-Zip-for-an-Agent-Session.md).
 
