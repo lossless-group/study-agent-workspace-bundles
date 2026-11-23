@@ -30,12 +30,56 @@ exploration
 - **(c) Live.** Pushed to in 2026.
 
 All pins are shallow (`--depth 1`); several of these repos are large (gVisor
-is over 1 GB). Each is pinned to the upstream HEAD of 2026-11-19. Fetch one
-before reading it:
+is over 1 GB). First pinned to the upstream HEAD of 2026-11-19; refreshed to
+upstream HEAD on 2026-11-23 (table below). Fetch one before reading it:
 
 ```sh
 git submodule update --init --depth 1 <name>    # e.g. gvisor
 ```
+
+### Pins last refreshed 2026-11-23
+
+Seven of thirteen repos had no new commits. Commit counts come from the GitHub
+compare API, because the shallow clones cannot count history locally. No repo
+cut a release inside its window; "latest release" is the newest GitHub release
+at refresh time.
+
+| Repo | Pinned commit date, old → new | Commits | Latest release |
+|---|---|---|---|
+| ro-crate | 2026-11-17 → 2026-11-20 | 4 | 1.3.0 (2026-06-22) |
+| agent-file | 2026-03-24 (unchanged) | 0 | none published |
+| mcpb | 2026-04-22 (unchanged) | 0 | v2.1.2 (2025-12-04) |
+| datapackage | 2026-08-25 (unchanged) | 0 | v2.0 (2024-10-23) |
+| devcontainers-spec | 2026-03-20 (unchanged) | 0 | none published |
+| containerd | 2026-11-19 → 2026-11-22 | 2 | v2.4.2 (2026-10-13) |
+| podman | 2026-11-19 → 2026-11-21 | 6 | v6.2.0 (2026-11-10) |
+| apple-container | 2026-11-13 (unchanged) | 0 | 1.7.1 (2026-11-06) |
+| gvisor | 2026-11-20 → 2026-11-23 | 51 | release-20261116.0 (2026-11-17) |
+| firecracker | 2026-11-18 → 2026-11-20 | 10 | v1.18.0 (2026-11-09) |
+| e2b | 2026-11-18 (unchanged) | 0 | @e2b/cli 2.24.0 (2026-11-13) |
+| cloudflare-sandbox-sdk | 2026-11-02 (unchanged) | 0 | @cloudflare/sandbox 1.0.3 (2026-10-22) |
+| pyodide | 2026-11-19 → 2026-11-20 | 3 | 314.0.8 (2026-11-13) |
+
+What moved, for this study's question:
+
+- **gVisor** added a `passt` mode to its network gofer for rootless sandbox
+  networking (`runsc/gofer/net/passt.go`). passt opens host sockets for the
+  sandbox; netgofer applies the same egress filter as proxy mode to outbound
+  packets, and the file notes the filter only holds if passt runs without
+  address translation. This bears on the isolation row: a rootless sandbox
+  with filtered egress.
+- **Firecracker** hardened the MMDS (metadata service) HTTP parsing in
+  `src/vmm/src/dumbo/tcp/` and fixed dirty-page tracking so a failed full
+  snapshot no longer loses pages (`src/vmm/src/vstate/memory.rs`). Snapshot
+  and restore is the mechanism a flave would use to resume a sandbox.
+- **ro-crate**: website and tools-list edits only (`docs/_data/tools_list.yml`).
+  The spec is unchanged at 1.3.0. The local commit count of 2194 is an artifact
+  of the shallow clone being unshallowed; the real gap is 4 commits.
+- **containerd, podman, pyodide**: small fixes, nothing that changes the
+  entries above. Podman's repo now lives at `podman-container-tools/podman`
+  (the old `containers/podman` URL redirects there); `.gitmodules` already
+  uses the new URL.
+- No license changes and no archived repos.
 
 ## What we are looking at, repo by repo
 
@@ -64,7 +108,7 @@ Working checklist for each entry:
 | The container runtime under Docker and Kubernetes, usable without Docker (`nerdctl` is its Docker-compatible CLI) | [containerd](./containerd) | Apache-2.0 |
 | Daemonless, rootless containers with a Docker-compatible CLI | [Podman](./podman) | Apache-2.0 |
 | Apple's container tool for macOS: each container runs in its own lightweight VM | [Apple `container`](./apple-container) | Apache-2.0 |
-| A user-space kernel that intercepts system calls, for running untrusted code | [gVisor](./gvisor) | Apache-2.0 |
+| A user-space kernel that intercepts system calls, for running untrusted code; rootless networking through passt as of November 2026 | [gVisor](./gvisor) | Apache-2.0 |
 | MicroVMs that boot in well under a second; the isolation behind AWS Lambda and many agent sandboxes | [Firecracker](./firecracker) | Apache-2.0 |
 | Open-source cloud sandboxes for agent-run code, built on Firecracker | [E2B](./e2b) | Apache-2.0 |
 | Sandboxes on Cloudflare Containers, driven from a Worker | [Cloudflare Sandbox SDK](./cloudflare-sandbox-sdk) | See repo (no SPDX id) |
