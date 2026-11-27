@@ -81,6 +81,15 @@ What moved, for this study's question:
   uses the new URL.
 - No license changes and no archived repos.
 
+### Added 2026-11-26
+
+- **Paperclip** (`paperclipai/paperclip`), pinned at `dadbc49` (2026-11-26);
+  latest release `v2026.1117.0` (2026-11-18). Meets all three criteria: it
+  defines a bundle format (the Agent Companies spec,
+  `docs/companies/companies-spec.md`) and drives several of the runtimes above
+  through plugins. Its profile is the study's first:
+  [`Profile__Paperclip.md`](./context-v/profiles/Profile__Paperclip.md).
+
 ## What we are looking at, repo by repo
 
 Working checklist for each entry:
@@ -100,6 +109,12 @@ Working checklist for each entry:
 | A local MCP server plus `manifest.json`; sensitive `user_config` fields go to the OS keychain | [MCP Bundles (`.mcpb`)](./mcpb) | See repo (no SPDX id) |
 | Typed data files with schemas, described by a `datapackage.json` | [Frictionless Data Package](./datapackage) | Unlicense |
 | `devcontainer.json`: a small recipe for a full development environment | [Dev Container spec](./devcontainers-spec) | CC-BY-4.0 |
+
+### Bundle format and orchestrator
+
+| Bet | Entry | License |
+|---|---|---|
+| A whole agent "company" as a markdown package (`COMPANY.md`, `TEAM.md`, `AGENTS.md`, `PROJECT.md`, `TASK.md` around Agent Skills' `SKILL.md`), sources pinned to commit + sha256, secrets exported as declared inputs with no values; plus encrypted workspace snapshots for resume and nine sandbox-provider plugins (E2B, Cloudflare, Daytona, Modal, Kubernetes, …). [Profile](./context-v/profiles/Profile__Paperclip.md) | [Paperclip](./paperclip) | MIT |
 
 ### Sandbox runtimes
 
@@ -137,7 +152,8 @@ directly on the reader's machine (master spec §10, M6).
 ## Not pinned (yet)
 
 - **Runtimes:** runc, crun, youki, Kata Containers, Cloud Hypervisor, Colima,
-  Wasmtime, WasmEdge. Listed above; pin when a question needs their source.
+  Wasmtime, WasmEdge, `kubernetes-sigs/agent-sandbox` (used by Paperclip's
+  Kubernetes plugin). Listed above; pin when a question needs their source.
 - **Hosted sandboxes:** Daytona, Modal, Vercel Sandbox, OrbStack (closed
   source), StackBlitz WebContainers (closed source).
 - **Formats:** BagIt (checksum manifests for archives), Nix flakes and devenv.
@@ -156,3 +172,7 @@ directly on the reader's machine (master spec §10, M6).
       runs on macOS, Linux and in a browser.
 - [ ] E2B and the Cloudflare Sandbox SDK: how a chat-style agent gets files in
       and out of a sandbox, which is where a flave export would hook in.
+- [ ] Paperclip's `sources[]` object vs. flave's `_sources.yaml`: adopt it
+      as-is? And should a flave also be a valid Agent Companies package?
+- [ ] Paperclip's `e2b/`, `cloudflare/` and `daytona/` sandbox plugins as
+      working answers to the files-in-and-out question above.

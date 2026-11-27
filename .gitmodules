@@ -50,3 +50,7 @@
 	path = pyodide
 	url = https://github.com/pyodide/pyodide.git
 	shallow = true
+[submodule "paperclip"]
+	path = paperclip
+	url = https://github.com/paperclipai/paperclip.git
+	shallow = true
